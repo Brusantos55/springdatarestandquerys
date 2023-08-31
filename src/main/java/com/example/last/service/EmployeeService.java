@@ -12,7 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.last.entity.Employee;
+import com.example.last.entity.filters.EmployeeFilter;
 import com.example.last.repository.EmployeeRepo;
+import com.example.last.repository.EmployeeRepoCustom;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
@@ -25,6 +27,8 @@ import com.example.last.exceptions.NameRepeatedException;
 public class EmployeeService {
 
     private final EmployeeRepo employeeRepo;
+    private final EmployeeRepoCustom employeeRepoCustom;
+
     
     /**
      * 
@@ -64,26 +68,6 @@ public class EmployeeService {
         return salida;
     }
 
-    public List<Employee> findAllCEO(){
-        return employeeRepo.findAllCEO();
-    }
-
-    public List<Employee> findAllAdminEmployees(){
-        return employeeRepo.findAllAdminEmployees();
-    }
-
-    public Iterable<Employee> sortEmployeesByField(String field){
-        return employeeRepo.findAll(Sort.by(field).ascending());
-    }   // puede que esto obtenga cada uno de los 
-
-    public Page<Employee> pagedEmployees(int page, int pageSize){
-        return employeeRepo.findAll(PageRequest.of(page, pageSize));
-    }
-
-    public Page<Employee> pagedAndSortedEmployees(int page, int pageSize, String field){
-        return employeeRepo.findAll(PageRequest.of(page, pageSize).withSort(Sort.by(field)));
-    }
-
     private String customName(int n){
 
         String name="br1";
@@ -105,6 +89,32 @@ public class EmployeeService {
 
         return name;
     }
+
+    public List<Employee> filterEmployees(EmployeeFilter filter){
+        return employeeRepoCustom.filterEmployees(filter);
+    }
+
+    public List<Employee> findAllCEO(){
+        return employeeRepo.findAllCEO();
+    }
+
+    public List<Employee> findAllAdminEmployees(){
+        return employeeRepo.findAllAdminEmployees();
+    }
+
+    public Iterable<Employee> sortEmployeesByField(String field){
+        return employeeRepo.findAll(Sort.by(field).ascending());
+    }   // puede que esto obtenga cada uno de los 
+
+    public Page<Employee> pagedEmployees(int page, int pageSize){
+        return employeeRepo.findAll(PageRequest.of(page, pageSize));
+    }
+
+    public Page<Employee> pagedAndSortedEmployees(int page, int pageSize, String field){
+        return employeeRepo.findAll(PageRequest.of(page, pageSize).withSort(Sort.by(field)));
+    }
+
+    
 
     // ControllerLinkBuilder.linkTo(EmployeeService.class).slash(Employee.getName()).withRel("name") @example
 }

@@ -9,12 +9,9 @@ import com.example.last.entity.Employee;
 
 import java.util.List;
 
-
 //@RepositoryRestResource(collectionResourceRel = "empleados", path = "empleados") genera los endpoints inecesario
-public interface EmployeeRepo extends 
+public interface EmployeeRepo extends //EmployeeRepoCustom,
     PagingAndSortingRepository<Employee, Long>{ // porporciona consultas para paginar y ordenar y extiende CrudRepo
-    
-    //List<Empleado> findByName(@Param("name") String name);   consulta personalizada que compara con el nombre
     
     /**
      * 
@@ -36,7 +33,5 @@ public interface EmployeeRepo extends
 
     @Query(value = "SELECT u FROM Employee u ORDER BY id")
     Page<Employee> findAllEmployeeWithPagination(Pageable pageable);
-
     
 } 
-//HATEOAS hiperlink as the enginee of aplication service

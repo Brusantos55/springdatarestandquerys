@@ -39,7 +39,7 @@ public class Employee{
         joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "FK_many_employees"), name = "employee"), 
         inverseJoinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "FK_many_projects"), name = "project")
     )
-    private Set<Project> project = new HashSet<>();
+    private Set<Project> projects = new HashSet<>();
 
     @ManyToOne //nullable=false,
     @JoinColumn( foreignKey = @ForeignKey(name = "FK_POSITION"), name = "position")
