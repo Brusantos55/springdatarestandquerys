@@ -42,6 +42,20 @@
 			<artifactId>springdoc-openapi-data-rest</artifactId>
 			<version>${springdocs.version}</version>
 		</dependency>
+		<dependency> 
+			<groupId>com.querydsl</groupId> 
+			<artifactId>querydsl-apt</artifactId> 
+			<scope>provided</scope>
+		</dependency> <!-- querydls dependencies -->
+		<dependency> 
+			<groupId>com.querydsl</groupId> 
+			<artifactId>querydsl-jpa</artifactId> 
+		</dependency>
+		<dependency> <!-- libreria de querydls que permite usar funciones desde la url -->
+			<groupId>org.bitbucket.gt_tech</groupId>
+			<artifactId>spring-data-querydsl-value-operators</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 		<dependency> <!-- mapea entidades en la base de datos (JDBC) -->
 			<groupId>com.mysql</groupId>
@@ -80,6 +94,29 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.3</version>
+				<executions>
+					<execution>
+					<goals>
+						<goal>process</goal>
+					</goals>
+					<configuration>
+						<outputDirectory>target/generated-sources/java</outputDirectory>
+						<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+						<!-- <processor>com.querydsl.apt.QuerydslAnnotationProcessor</processor> -->
+						<options>
+                            <querydsl.logInfo>true</querydsl.logInfo>
+                            <querydsl.listAccessors>false</querydsl.listAccessors>
+                            <querydsl.useGetters>true</querydsl.useGetters>
+                            <querydsl.unknownAsEmbeddable>true</querydsl.unknownAsEmbeddable>
+                        </options>
+					</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

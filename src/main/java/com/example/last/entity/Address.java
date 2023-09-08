@@ -14,7 +14,7 @@ public class Address {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idAddress;
+    private Long id;
 
     private StreetTypeEnum streetType;
 

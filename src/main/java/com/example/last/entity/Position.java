@@ -17,7 +17,7 @@ public class Position {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idPosition;
+    private Long id;
 
     private PositionEnum positionType;
     

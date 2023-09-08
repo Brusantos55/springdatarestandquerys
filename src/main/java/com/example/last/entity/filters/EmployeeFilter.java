@@ -2,8 +2,7 @@ package com.example.last.entity.filters;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
+// import java.util.Set;
 
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -22,23 +21,26 @@ public class EmployeeFilter {
 
     private LocalDate birthdate;
 
+    private LocalDate birthdate2;
+
     private ZonedDateTime lastLogin; 
 
     private Boolean isAdmin; 
 
-    private double timeLogged = -10; 
+    private Double timeLogged; 
 
-    private Set<Long> projects;// = new HashSet<>()
+    private Long project;// Set<> = new HashSet<>()
     
     private Long position;
 
     private Long address;
 
-    @Override
-    public String toString() {
-        return "EmployeeFilter [id=" + id + ", name=" + name + ", birthdate=" + birthdate + ", lastLogin=" + lastLogin
-                + ", isAdmin=" + isAdmin + ", timeLogged=" + timeLogged + ", projects=" + projects + ", position="
-                + position + ", address=" + address + "]";
-    }
+    private String sortBy;
+
+    private boolean sortDesc = false; 
+
+    private int page;
+
+    private int pageSize;
 
 }
