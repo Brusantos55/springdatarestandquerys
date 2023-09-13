@@ -2,7 +2,6 @@ package com.example.last.entity.filters;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-// import java.util.Set;
 
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -29,7 +28,7 @@ public class EmployeeFilter {
 
     private Double timeLogged; 
 
-    private Long project;// Set<> = new HashSet<>()
+    private Long project;
     
     private Long position;
 

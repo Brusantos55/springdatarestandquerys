@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.persistence.criteria.Predicate;
-
 import com.example.last.entity.filters.SearchCriteria;
 import com.example.last.service.EmpPredicateService;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 
+/**
+ * clase que utiliza searchcriteria para 
+ * generar los predicados de comparacion 
+ * de numeros para querydls personalizado
+ */
 public class EmpPredicate {
     private List<SearchCriteria> params;
 

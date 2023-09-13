@@ -12,14 +12,16 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.example.last.entity.Employee;
-// import com.example.last.entity.EmployeeProjectFK;
 import com.example.last.entity.filters.EmployeeFilter;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * repo con consultas mediante criteria
+ */
 @Repository
 @RequiredArgsConstructor
-public class EmployeeRepoCustomImp implements EmployeeRepoCustom{
+public class EmployeeRepoCriteriaImp implements EmployeeRepoCriteria{
     
     private final EntityManager em;
 
@@ -30,17 +32,15 @@ public class EmployeeRepoCustomImp implements EmployeeRepoCustom{
         CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
     
         Root<Employee> employee = cq.from(Employee.class);
-
-        // Root<EmployeeProjectFK> fkEmProj = cq.from(EmployeeProjectFK.class);
         
-        cq = buildQuery(employee, cq, cb, filter);//fkEmProj, 
+        cq = buildQuery(employee, cq, cb, filter);
     
         return em.createQuery(cq).getResultList();
     }
 
-    private CriteriaQuery<Employee> buildQuery(Root<Employee> employee, CriteriaQuery<Employee> cq, CriteriaBuilder cb, EmployeeFilter filter){//, Root<EmployeeProjectFK> fkEmProj
+    private CriteriaQuery<Employee> buildQuery(Root<Employee> employee, CriteriaQuery<Employee> cq, CriteriaBuilder cb, EmployeeFilter filter){
         
-        List<Predicate> predicates = buildPredicates(employee, cb, filter);//fkEmProj, 
+        List<Predicate> predicates = buildPredicates(employee, cb, filter);
 
         if (filter.getSortBy() != null) {
 
@@ -56,7 +56,7 @@ public class EmployeeRepoCustomImp implements EmployeeRepoCustom{
         }
     }
 
-    private List<Predicate> buildPredicates(Root<Employee> employee, CriteriaBuilder cb, EmployeeFilter filter){//Root<EmployeeProjectFK> fkEmProj, 
+    private List<Predicate> buildPredicates(Root<Employee> employee, CriteriaBuilder cb, EmployeeFilter filter){
         List<Predicate> predicates = new ArrayList<>();
 
         if (filter.getName() != null) {
@@ -84,11 +84,6 @@ public class EmployeeRepoCustomImp implements EmployeeRepoCustom{
         if (filter.getTimeLogged() != null) {
             predicates.add(cb.equal(employee.get("timeLogged"), filter.getTimeLogged()));
         }
-
-        // if (filter.getProject() != null && filter.getId() != null) {
-        //     predicates.add(cb.equal(employee.get("projects").get("employee").get("id"), filter.getId()));
-        //     predicates.add(cb.equal(employee.get("projects").get("project").get("id"), filter.getProject()));
-        // }
 
         if (filter.getPosition() != null) {
             predicates.add(cb.equal(employee.get("position").get("idPosition"), filter.getPosition()));

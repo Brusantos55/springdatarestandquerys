@@ -3,14 +3,10 @@ package com.example.last.service;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,11 +15,10 @@ import org.springframework.stereotype.Service;
 import com.example.last.entity.Employee;
 import com.example.last.entity.EmployeeProjectFK;
 import com.example.last.entity.Project;
-import com.example.last.entity.especificaciones.EmpSpec;
 import com.example.last.entity.filters.EmployeeFilter;
 import com.example.last.repository.EmpProjectFKRepo;
 import com.example.last.repository.EmployeeRepo;
-import com.example.last.repository.EmployeeRepoCustom;
+import com.example.last.repository.EmployeeRepoCriteria;
 import com.querydsl.core.types.Predicate;
 
 import lombok.RequiredArgsConstructor;
@@ -37,7 +32,7 @@ import com.example.last.exceptions.NameRepeatedException;
 public class EmployeeService {
 
     private final EmployeeRepo employeeRepo;
-    private final EmployeeRepoCustom employeeRepoCustom;
+    private final EmployeeRepoCriteria employeeRepoCustom;
     private final EmpProjectFKRepo fkRepo;
   
     /**
@@ -45,8 +40,6 @@ public class EmployeeService {
      * crea hasta 6 empleados con informacion semi-aleatoria
      * @param n numero de elementos que se van a intentar crear
      * @return devuelve un mensaje segun se desarrolle el proceso
-     * @see https://www.baeldung.com/transaction-configuration-with-jpa-and-spring
-     * @see https://www.baeldung.com/spring-boot-logging https://www.digitalocean.com/community/tutorials/logger-in-java-logging-example#logger-in-java
      */
     @Transactional
     public String createRamdomEmployees(int n){
@@ -61,7 +54,7 @@ public class EmployeeService {
             emp.setName(customName(i));
             emp.setIsAdmin((i%2==0)?true:false);
             emp.setLastLogin(ZonedDateTime.now());
-            emp.setTimeLogged(new Random().nextDouble(2453)*i);
+            emp.setTimeLogged(Double.valueOf(new Random().nextInt(2453)*i));
 
             log.info("creado elemento "+i);
 
@@ -100,18 +93,7 @@ public class EmployeeService {
         return name;
     }
 
-    public List<Employee> filterEmployees(EmployeeFilter filter){
-        return employeeRepoCustom.filterEmployees(filter);
-    }
-
-    public List<Employee> findAllCEO(){
-        return employeeRepo.findAllCEO();
-    }
-    
-    public List<Employee> findAllAdminEmployees(){
-        return employeeRepo.findAllAdminEmployees();
-    }
-    
+    /** ejemplos paging and sorting */
     public Iterable<Employee> sortEmployeesByField(String field){
         return employeeRepo.findAll(Sort.by(field).ascending());
     }
@@ -124,22 +106,24 @@ public class EmployeeService {
         return employeeRepo.findAll(PageRequest.of(page, pageSize).withSort(Sort.by(field)));
     }
     
-    public Page<Employee> filterEmployeesSp(EmployeeFilter filter){
-        return employeeRepo.findAll(EmpSpec.filtrado(filter), PageRequest.of(filter.getPage(), filter.getPageSize()));
+    /** querydls */
+    public Iterable<Employee> findAllByWebQuerydsl(Predicate predicate){
+        return employeeRepo.findAll(predicate);
+    }
+    
+    /**
+     * filtro con criteria
+     */
+    public List<Employee> filterEmployees(EmployeeFilter filter){
+        return employeeRepoCustom.filterEmployees(filter);
     }
 
-    public Iterable<Employee> filterByExample(Employee ex){ 
-        ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
-        return employeeRepo.findAll(Example.of(ex, matcher));
-    }
-
+    /**
+     * consulta dos repositorios
+     */
     public List<Project> findProjectsByEmpId(Long id){
         Employee emp = employeeRepo.findById(id).orElse(null);
         List<EmployeeProjectFK> fks = fkRepo.findAllByEmployee(emp);
-        return fks.stream().map(fk -> fk.getProject()).collect(Collectors.toList());//projects;List<Project> projects = 
-    }
-
-    public Iterable<Employee> findAllByWebQuerydsl(Predicate predicate){
-        return employeeRepo.findAll(predicate);
+        return fks.stream().map(fk -> fk.getProject()).collect(Collectors.toList());
     }
 }

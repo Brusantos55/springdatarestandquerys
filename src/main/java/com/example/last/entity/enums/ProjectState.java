@@ -1,5 +1,5 @@
 package com.example.last.entity.enums;
 
 public enum ProjectState{
-    Modelado, Asignacion, Desarrollo, Cierre
+    MODELADO, ASIGNACION, DESARROLLO, CIERRE
 }

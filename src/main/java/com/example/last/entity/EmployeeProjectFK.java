@@ -14,13 +14,12 @@ public class EmployeeProjectFK {
     @GeneratedValue(strategy = GenerationType.AUTO) 
     private Long id;
     
-    // @JsonIgnore
-    @ManyToOne //(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( nullable=false,
         foreignKey = @ForeignKey(name = "FK_EMPLOYEE"))
     private Employee employee;
     
-    @ManyToOne //(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( nullable=false,
         foreignKey = @ForeignKey(name = "FK_PROJECT"))
     private Project project;

@@ -1,12 +1,15 @@
 package com.example.last.repository;
 
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import com.example.last.entity.Position;
 
+/**
+ * repo con queryByExample
+ */
 public interface PositionRepo extends
         PagingAndSortingRepository<Position, Long>,
-        QuerydslPredicateExecutor<Position>{ 
+            QueryByExampleExecutor<Position>{ 
         
     }

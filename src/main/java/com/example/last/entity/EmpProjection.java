@@ -8,7 +8,7 @@ import com.example.last.entity.enums.PositionEnum;
 
 @Projection(types = {Employee.class}, name = "empProjection")
 @RepositoryRestResource
-public interface EmpProjection { // http://localhost:8080/employees/1?projection=empProjection
+public interface EmpProjection { // /employees/{id}?projection=empProjection
 
     String getId(); 
 
@@ -21,5 +21,3 @@ public interface EmpProjection { // http://localhost:8080/employees/1?projection
 
     Address getAddress();
 }
-//https://stackoverflow.com/questions/36701358/how-to-use-projection-interfaces-with-pagination-in-spring-data-jpa
-//

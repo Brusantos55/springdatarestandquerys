@@ -8,13 +8,4 @@ public class RespStaException extends RuntimeException {
     public RespStaException() {
         super();
     }
-    // public RespStaException(String message, Throwable cause) {
-    //     super(message, cause);
-    // }
-    // public RespStaException(String message) {
-    //     super(message);
-    // }
-    // public RespStaException(Throwable cause) {
-    //     super(cause);
-    // }
 }

@@ -9,6 +9,9 @@ import com.querydsl.core.types.dsl.StringPath;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * servicio de quedls personalizado para comparar numeros
+ */
 @AllArgsConstructor
 public class EmpPredicateService {
     private SearchCriteria criteria;

@@ -23,6 +23,11 @@ public class EmpdlsController {
 
     private final EmployeeRepo employeeRepo;
 
+    /**
+     * controlador de querydls personalizado para comparar numeros
+     * @param search string con el nombre del campo a filtrar y la operacion( : igualdad, <, >)
+     * @return el resultado del filtro
+     */
     @ResponseBody
     @GetMapping("{search}")
     public Iterable<Employee> search(@PathVariable String search) {
