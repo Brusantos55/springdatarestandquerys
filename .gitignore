@@ -2,7 +2,9 @@
 Git Bash.lnk
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
+.mvn/
+mvnw
+mvnw.cmd
 
 ### VS Code ###
 .vscode
