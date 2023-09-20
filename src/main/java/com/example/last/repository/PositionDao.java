@@ -8,7 +8,7 @@ import com.example.last.entity.Position;
 /**
  * repo con queryByExample
  */
-public interface PositionRepo extends
+public interface PositionDao extends
         PagingAndSortingRepository<Position, Long>,
             QueryByExampleExecutor<Position>{ 
         

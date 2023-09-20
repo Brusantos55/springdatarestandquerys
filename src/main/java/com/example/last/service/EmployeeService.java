@@ -16,24 +16,23 @@ import com.example.last.entity.Employee;
 import com.example.last.entity.EmployeeProjectFK;
 import com.example.last.entity.Project;
 import com.example.last.entity.filters.EmployeeFilter;
-import com.example.last.repository.EmpProjectFKRepo;
-import com.example.last.repository.EmployeeRepo;
-import com.example.last.repository.EmployeeRepoCriteria;
+import com.example.last.exception.NameRepeatedException;
+import com.example.last.repository.EmployeeProjectFKDao;
+import com.example.last.repository.EmployeeDao;
+import com.example.last.repository.IEmployeeDaoCriteria;
 import com.querydsl.core.types.Predicate;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
-
-import com.example.last.exceptions.NameRepeatedException;
 
 @Service
 @CommonsLog
 @RequiredArgsConstructor
 public class EmployeeService {
 
-    private final EmployeeRepo employeeRepo;
-    private final EmployeeRepoCriteria employeeRepoCustom;
-    private final EmpProjectFKRepo fkRepo;
+    private final EmployeeDao employeeRepo;
+    private final IEmployeeDaoCriteria employeeRepoCustom;
+    private final EmployeeProjectFKDao fkRepo;
   
     /**
      * 
@@ -52,9 +51,10 @@ public class EmployeeService {
             Employee emp = new Employee();
 
             emp.setName(customName(i));
-            emp.setIsAdmin((i%2==0)?true:false);
+            emp.setIsAdmin((i%2==0));
             emp.setLastLogin(ZonedDateTime.now());
-            emp.setTimeLogged(Double.valueOf(new Random().nextInt(2453)*i));
+            // no necesito re-usar ese Rambdom #ignoreSonarLint
+            emp.setTimeLogged(new Random().nextInt(2453)*(double)i);
 
             log.info("creado elemento "+i);
 
@@ -74,7 +74,7 @@ public class EmployeeService {
     private String customName(int n){
 
         String name="br1";
-
+        //La declaracion me sirve como default para el switch #ignoreSonarLint
         switch (n) {
             case 1:
                 name="Jose";

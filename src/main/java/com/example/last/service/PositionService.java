@@ -5,7 +5,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.example.last.entity.Position;
-import com.example.last.repository.PositionRepo;
+import com.example.last.repository.PositionDao;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,10 +14,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PositionService {
     
-    private final PositionRepo positionRepo;
+    private final PositionDao positionRepo;
 
     public Iterable<Position> filterByExample(Position ex){ 
-        // ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
-        return positionRepo.findAll(Example.of(ex)); // , matcher
+        // ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher(
+        //  "name", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());  , matcher
+        return positionRepo.findAll(Example.of(ex));
     }
 }

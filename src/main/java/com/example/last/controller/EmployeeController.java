@@ -1,4 +1,4 @@
-package com.example.last.controllers;
+package com.example.last.controller;
 
 import java.util.List;
 
@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.last.entity.Employee;
 import com.example.last.entity.Project;
 import com.example.last.entity.filters.EmployeeFilter;
+import com.example.last.exception.RespStaException;
 import com.example.last.service.EmployeeService;
 import com.querydsl.core.types.Predicate;
-import com.example.last.exceptions.RespStaException;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,8 +26,8 @@ import lombok.RequiredArgsConstructor;
 
 
 @RestController
-@RequestMapping("/customEmployees") //formato recomendado url/uri REST.
-@RequiredArgsConstructor            //cant parse json | propiedad para que todo lo que recibe y envia sea json
+@RequestMapping("/customEmployees")
+@RequiredArgsConstructor
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -37,8 +36,7 @@ public class EmployeeController {
      * controlador de querydls
      * url example: ?name=contains(a)&name=or(contains(o))&sort=name,desc&page=1&size=2
      */
-    @ResponseBody
-    @GetMapping("/api/Employee")
+    @GetMapping("/api/employees")
     public Iterable<Employee> findAllByQuerydsl(@QuerydslPredicate(root = Employee.class) Predicate predicate) {
         return employeeService.findAllByWebQuerydsl(predicate);
     }

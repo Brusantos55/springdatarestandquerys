@@ -1,4 +1,9 @@
 .gitignore
+.metadata/
+.settings/
+.factorypath
+.project
+.classpath
 Git Bash.lnk
 HELP.md
 target/

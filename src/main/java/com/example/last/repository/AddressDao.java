@@ -16,7 +16,7 @@ import com.example.last.entity.Address;
  * endpoints autogenerados requieren la url del recurso que se relaciona en el body del post put y patch, pero solo el id en la url del put y patch.
  * por ejemplo si quiero cambiar la address del empleado 2 puedo hacer un patch con la url: "localhost.../employee/2" y body {"address": "localhost.../address/4"}
  */
-public interface AddressRepo extends
+public interface AddressDao extends
     PagingAndSortingRepository<Address, Long>{
     
     @Query("SELECT a FROM Address a WHERE a.streetType = 0")
@@ -26,8 +26,9 @@ public interface AddressRepo extends
     // (SELECT a FROM Address a where a.streetType = 0)") 
     // List<Employee> findAllEmpWhoLivesInAvenues(); 
 
-    @Query( nativeQuery = true,  value =                // esto quizas es mejor seleccionar todos 
-    "SELECT * FROM address a where mod(zipCode,2)=0;") // y hacer la operacion en el servicio?
+    // esto quizas es mejor seleccionar todos y hacer la operacion en el servicio?
+    @Query( nativeQuery = true,  value =
+    "SELECT * FROM address a where mod(zipCode,2)=0;")
     List<Address> findAllEvenZip();
 
     Page<Address> findAll(Pageable pageable);

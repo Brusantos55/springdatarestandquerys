@@ -1,4 +1,4 @@
-package com.example.last.service;
+package com.example.last.auxiliary;
 
 import com.example.last.entity.Employee;
 import com.example.last.entity.filters.SearchCriteria;
@@ -10,10 +10,10 @@ import com.querydsl.core.types.dsl.StringPath;
 import lombok.AllArgsConstructor;
 
 /**
- * servicio de quedls personalizado para comparar numeros
+ * constructor de predicados quedls personalizado para comparar numeros
  */
 @AllArgsConstructor
-public class EmpPredicateService {
+public class PredicateBuilder {
     private SearchCriteria criteria;
 
     public BooleanExpression getPredicate() {

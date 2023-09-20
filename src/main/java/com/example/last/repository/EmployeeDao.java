@@ -17,17 +17,20 @@ import com.querydsl.core.types.dsl.StringPath;
  * repo con querydls por defecto
  * ejemplo consulta: ?name=contains(a)&name=or(contains(o))&sort=name,desc&page=1&size=2
  */
-public interface EmployeeRepo extends 
+public interface EmployeeDao extends 
     PagingAndSortingRepository<Employee, Long>,
                 QuerydslPredicateExecutor<Employee>, 
                 QuerydslBinderCustomizer<QEmployee>{
 
     @Override
     public default void customize(
+      // los numeros solo se pueden igualar
       QuerydslBindings bindings, QEmployee root) {
-        bindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);      
-        bindings.bind(root.name).all((path, values) -> ExpressionProviderFactory.getPredicate(path, values)); // los numeros solo se pueden igualar
-        // bindings.bind(root.position.positionType).all((path, values) -> ExpressionProviderFactory.getPredicate(path, values)); sin este bind funciona /employees?position.salary=CEO
-        // bindings.excluding(root.timeLogged);
+
+        bindings.bind(String.class).first(
+            (SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase); 
+
+        bindings.bind(root.name).all((path, values) -> ExpressionProviderFactory.getPredicate(path, values)); 
+        
       }
 } 

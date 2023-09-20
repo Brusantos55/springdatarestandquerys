@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Repository
 @RequiredArgsConstructor
-public class EmployeeRepoCriteriaImp implements EmployeeRepoCriteria{
+public class EmployeeDaoCriteriaImpl implements IEmployeeDaoCriteria{
     
     private final EntityManager em;
 

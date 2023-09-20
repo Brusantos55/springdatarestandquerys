@@ -1,8 +1,8 @@
 package com.example.last.entity;
 
-import com.example.last.entity.enums.StreetTypeEnum;
-
 import javax.persistence.*;
+
+import com.example.last.entity.enumeration.StreetTypeEnum;
 
 import lombok.NoArgsConstructor;
 import lombok.Data;

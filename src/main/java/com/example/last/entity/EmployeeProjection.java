@@ -1,14 +1,13 @@
 package com.example.last.entity;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.config.Projection;
 
-import com.example.last.entity.enums.PositionEnum;
+import com.example.last.entity.enumeration.PositionEnum;
 
+// /employees/{id}?projection=empProjection
 @Projection(types = {Employee.class}, name = "empProjection")
-@RepositoryRestResource
-public interface EmpProjection { // /employees/{id}?projection=empProjection
+public interface EmployeeProjection { 
 
     String getId(); 
 
