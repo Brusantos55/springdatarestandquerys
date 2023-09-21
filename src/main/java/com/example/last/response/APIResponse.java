@@ -1,4 +1,4 @@
-package com.exampl.last.response;
+package com.example.last.response;
 
 import org.springframework.hateoas.RepresentationModel;
 

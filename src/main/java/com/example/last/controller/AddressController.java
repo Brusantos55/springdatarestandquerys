@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exampl.last.response.APIResponse;
+import com.example.last.response.APIResponse;
 import com.example.last.entity.Address;
 import com.example.last.repository.AddressRepository;
 
