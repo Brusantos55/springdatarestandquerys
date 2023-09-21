@@ -7,12 +7,16 @@ import com.example.last.filter.ProjectFilter;
 
 import org.springframework.data.jpa.domain.Specification;
 
+/**
+ * Clase de utilidad con especificaciones que comparan la 
+ * igualdad del parametro del filtro con las instancias de la bd
+ */
 public class ProjectSpecification {
 
-    /**
-     * especificaiones que comparan la igualdad del parametro del filtro con las
-     * instancias de la bd
-     */
+    private ProjectSpecification() {
+        throw new IllegalStateException("Utility class");
+    }
+    
     public static Specification<Project> spbase(Long id) {
         return (project, cq, cb) -> cb.gt(project.get("id"), id);
     }
