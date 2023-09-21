@@ -1,4 +1,4 @@
-package com.example.last.entity.filters;
+package com.example.last.filter;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;

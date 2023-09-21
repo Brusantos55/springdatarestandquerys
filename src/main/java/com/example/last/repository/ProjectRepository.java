@@ -8,7 +8,7 @@ import com.example.last.entity.Project;
 /**
  * repo con especificaciones
  */
-public interface ProjectDao extends
+public interface ProjectRepository extends
         PagingAndSortingRepository<Project, Long>,
             JpaSpecificationExecutor<Project>{ 
         

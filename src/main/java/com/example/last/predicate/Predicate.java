@@ -1,7 +1,7 @@
-package com.example.last.auxiliary;
+package com.example.last.predicate;
 
 import com.example.last.entity.Employee;
-import com.example.last.entity.filters.SearchCriteria;
+import com.example.last.filter.SearchCriteria;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathBuilder;
@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
  * constructor de predicados quedls personalizado para comparar numeros
  */
 @AllArgsConstructor
-public class PredicateBuilder {
+public class Predicate {
     private SearchCriteria criteria;
 
     public BooleanExpression getPredicate() {
@@ -23,12 +23,12 @@ public class PredicateBuilder {
             NumberPath<Integer> path = entityPath.getNumber(criteria.getKey(), Integer.class);
             int value = Integer.parseInt(criteria.getValue().toString());
             switch (criteria.getOperation()) {
-                case ":":
-                    return path.eq(value);
                 case ">":
                     return path.goe(value);
                 case "<":
                     return path.loe(value);
+                default:
+                    return path.eq(value);
             }
         } 
         else {

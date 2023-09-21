@@ -1,4 +1,4 @@
-package com.example.last.entity.filters;
+package com.example.last.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

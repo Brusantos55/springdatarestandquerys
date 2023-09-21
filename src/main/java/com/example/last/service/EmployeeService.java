@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 import com.example.last.entity.Employee;
 import com.example.last.entity.EmployeeProjectFK;
 import com.example.last.entity.Project;
-import com.example.last.entity.filters.EmployeeFilter;
 import com.example.last.exception.NameRepeatedException;
-import com.example.last.repository.EmployeeProjectFKDao;
-import com.example.last.repository.EmployeeDao;
-import com.example.last.repository.IEmployeeDaoCriteria;
+import com.example.last.filter.EmployeeFilter;
+import com.example.last.repository.EmployeeProjectFKRepository;
+import com.example.last.repository.EmployeeRepository;
+import com.example.last.repository.EmployeeCriteriaRepository;
 import com.querydsl.core.types.Predicate;
 
 import lombok.RequiredArgsConstructor;
@@ -30,9 +30,9 @@ import lombok.extern.apachecommons.CommonsLog;
 @RequiredArgsConstructor
 public class EmployeeService {
 
-    private final EmployeeDao employeeRepo;
-    private final IEmployeeDaoCriteria employeeRepoCustom;
-    private final EmployeeProjectFKDao fkRepo;
+    private final EmployeeRepository employeeRepo;
+    private final EmployeeCriteriaRepository employeeRepoCustom;
+    private final EmployeeProjectFKRepository fkRepo;
   
     /**
      * 
@@ -53,7 +53,7 @@ public class EmployeeService {
             emp.setName(customName(i));
             emp.setIsAdmin((i%2==0));
             emp.setLastLogin(ZonedDateTime.now());
-            // no necesito re-usar ese Rambdom #ignoreSonarLint
+            // no necesito re-usar ese Random #ignoreSonarLint
             emp.setTimeLogged(new Random().nextInt(2453)*(double)i);
 
             log.info("creado elemento "+i);
@@ -73,8 +73,8 @@ public class EmployeeService {
 
     private String customName(int n){
 
-        String name="br1";
-        //La declaracion me sirve como default para el switch #ignoreSonarLint
+        String name;
+        
         switch (n) {
             case 1:
                 name="Jose";
@@ -88,6 +88,8 @@ public class EmployeeService {
             case 4:
                 name="Juan";
                 break;
+            default:
+            	name="br1";
         }
 
         return name;

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.last.auxiliary.Predicate;
 import com.example.last.entity.Employee;
-import com.example.last.repository.EmployeeDao;
+import com.example.last.predicate.PredicateBuilder;
+import com.example.last.repository.EmployeeRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/dls/employees")
 public class EmployeeDlsController {
 
-    private final EmployeeDao employeeRepo;
+    private final EmployeeRepository employeeRepo;
 
     /**
      * controlador de querydls personalizado para comparar numeros
@@ -29,7 +29,7 @@ public class EmployeeDlsController {
      */
     @GetMapping("{search}")
     public Iterable<Employee> search(@PathVariable String search) {
-        Predicate builder = new Predicate();
+        PredicateBuilder builder = new PredicateBuilder();
 
         if (search != null) {
             Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");

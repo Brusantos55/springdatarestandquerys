@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.example.last.entity.enumeration.PositionEnum;
+import com.example.last.enumeration.PositionEnum;
 
 import lombok.NoArgsConstructor;
 import lombok.Data;

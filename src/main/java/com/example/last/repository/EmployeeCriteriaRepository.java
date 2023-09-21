@@ -3,8 +3,8 @@ package com.example.last.repository;
 import java.util.List;
 
 import com.example.last.entity.Employee;
-import com.example.last.entity.filters.EmployeeFilter;
+import com.example.last.filter.EmployeeFilter;
 
-public interface IEmployeeDaoCriteria {
+public interface EmployeeCriteriaRepository {
     List<Employee> filterEmployees(EmployeeFilter filter); 
 }

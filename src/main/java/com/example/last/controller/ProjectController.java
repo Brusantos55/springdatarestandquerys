@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.last.entity.Project;
-import com.example.last.entity.filters.ProjectFilter;
+import com.example.last.filter.ProjectFilter;
 import com.example.last.service.ProjectService;
 
 import io.swagger.v3.oas.annotations.Operation;

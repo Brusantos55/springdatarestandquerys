@@ -1,7 +1,7 @@
-package com.example.last.entity.filters;
+package com.example.last.filter;
 
-import com.example.last.entity.enumeration.ProjectState;
-import com.example.last.entity.enumeration.ProjectType;
+import com.example.last.enumeration.ProjectState;
+import com.example.last.enumeration.ProjectType;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

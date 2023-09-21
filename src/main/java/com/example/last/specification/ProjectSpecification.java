@@ -1,9 +1,10 @@
-package com.example.last.auxiliary;
+package com.example.last.specification;
 
 import com.example.last.entity.Project;
-import com.example.last.entity.enumeration.ProjectState;
-import com.example.last.entity.enumeration.ProjectType;
-import com.example.last.entity.filters.ProjectFilter;
+import com.example.last.enumeration.ProjectState;
+import com.example.last.enumeration.ProjectType;
+import com.example.last.filter.ProjectFilter;
+
 import org.springframework.data.jpa.domain.Specification;
 
 public class ProjectSpecification {

@@ -15,8 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.last.entity.Employee;
 import com.example.last.entity.Project;
-import com.example.last.entity.filters.EmployeeFilter;
 import com.example.last.exception.RespStaException;
+import com.example.last.filter.EmployeeFilter;
 import com.example.last.service.EmployeeService;
 import com.querydsl.core.types.Predicate;
 

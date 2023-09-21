@@ -2,8 +2,8 @@ package com.example.last.entity;
 
 import javax.persistence.*;
 
-import com.example.last.entity.enumeration.ProjectState;
-import com.example.last.entity.enumeration.ProjectType;
+import com.example.last.enumeration.ProjectState;
+import com.example.last.enumeration.ProjectType;
 
 import lombok.NoArgsConstructor;
 import lombok.Data;

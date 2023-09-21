@@ -1,11 +1,11 @@
-package com.example.last.auxiliary;
+package com.example.last.predicate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.example.last.entity.filters.SearchCriteria;
+import com.example.last.filter.SearchCriteria;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 
@@ -14,22 +14,22 @@ import com.querydsl.core.types.dsl.Expressions;
  * generar los predicados de comparacion 
  * de numeros para querydls personalizado
  */
-public class Predicate {
+public class PredicateBuilder {
     private List<SearchCriteria> params;
 
-    public Predicate() {
+    public PredicateBuilder() {
         params = new ArrayList<>();
     }
-    public Predicate(List<SearchCriteria> paramsC) {
+    public PredicateBuilder(List<SearchCriteria> paramsC) {
         params = paramsC;
     }
-    public Predicate(SearchCriteria parm){
+    public PredicateBuilder(SearchCriteria parm){
         params = new ArrayList<>();
         params.add(parm);
     }
 
 
-    public Predicate with(
+    public PredicateBuilder with(
       String key, String operation, Object value) {
   
         params.add(new SearchCriteria(key, operation, value));
@@ -43,7 +43,7 @@ public class Predicate {
 
         List<BooleanExpression> predicates = params.stream().map(param -> {
 
-            PredicateBuilder predicate = new PredicateBuilder(param);
+            Predicate predicate = new Predicate(param);
 
             return predicate.getPredicate();
 

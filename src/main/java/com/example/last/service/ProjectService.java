@@ -4,10 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.example.last.auxiliary.ProjectSpecification;
 import com.example.last.entity.Project;
-import com.example.last.entity.filters.ProjectFilter;
-import com.example.last.repository.ProjectDao;
+import com.example.last.filter.ProjectFilter;
+import com.example.last.repository.ProjectRepository;
+import com.example.last.specification.ProjectSpecification;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProjectService {
     
-    private final ProjectDao projectRepo; 
+    private final ProjectRepository projectRepo; 
 
     public Page<Project> filterProjectsSp(ProjectFilter filter){
         return projectRepo.findAll(

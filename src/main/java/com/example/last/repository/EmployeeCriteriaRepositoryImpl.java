@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.example.last.entity.Employee;
-import com.example.last.entity.filters.EmployeeFilter;
+import com.example.last.filter.EmployeeFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,9 @@ import lombok.RequiredArgsConstructor;
  */
 @Repository
 @RequiredArgsConstructor
-public class EmployeeDaoCriteriaImpl implements IEmployeeDaoCriteria{
+public class EmployeeCriteriaRepositoryImpl implements EmployeeCriteriaRepository{
+	
+	private static final String BIRTHDATE = "birthdate";
     
     private final EntityManager em;
 
@@ -65,12 +67,12 @@ public class EmployeeDaoCriteriaImpl implements IEmployeeDaoCriteria{
 
         if (filter.getBirthdate() != null && filter.getBirthdate2() != null){
 
-            predicates.add(cb.greaterThanOrEqualTo(employee.get("birthdate"), filter.getBirthdate()));
-            predicates.add(cb.lessThanOrEqualTo(employee.get("birthdate"), filter.getBirthdate2()));
+            predicates.add(cb.greaterThanOrEqualTo(employee.get(BIRTHDATE), filter.getBirthdate()));
+            predicates.add(cb.lessThanOrEqualTo(employee.get(BIRTHDATE), filter.getBirthdate2()));
 
         } else if (filter.getBirthdate() != null){
 
-            predicates.add(cb.equal(employee.get("birthdate"), filter.getBirthdate()));
+            predicates.add(cb.equal(employee.get(BIRTHDATE), filter.getBirthdate()));
         }
         
         if (filter.getLastLogin() != null) {

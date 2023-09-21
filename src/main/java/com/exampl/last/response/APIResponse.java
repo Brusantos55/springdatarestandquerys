@@ -1,4 +1,4 @@
-package com.example.last.entity;
+package com.exampl.last.response;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -11,4 +11,16 @@ import lombok.Setter;
 @AllArgsConstructor
 public class APIResponse<T> extends RepresentationModel<APIResponse<T>> {
     T response;
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+    
+    
 }

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.last.entity.APIResponse;
+import com.exampl.last.response.APIResponse;
 import com.example.last.entity.Address;
-import com.example.last.repository.AddressDao;
+import com.example.last.repository.AddressRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @RequiredArgsConstructor
 public class AddressController {
 
-    private final AddressDao addresRepo;
+    private final AddressRepository addresRepo;
 
     /**
      * controllador con hateoas y responseObject

@@ -11,7 +11,7 @@ import com.example.last.entity.Employee;
  * repo excluido de los endpoints autogenerados de spring data rest
  */
 @RepositoryRestResource(exported = false)
-public interface EmployeeProjectFKDao extends
+public interface EmployeeProjectFKRepository extends
     PagingAndSortingRepository<EmployeeProjectFK, Long>{
     
         List<EmployeeProjectFK> findAllByEmployee(Employee employee);

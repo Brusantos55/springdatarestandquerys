@@ -17,7 +17,7 @@ import com.querydsl.core.types.dsl.StringPath;
  * repo con querydls por defecto
  * ejemplo consulta: ?name=contains(a)&name=or(contains(o))&sort=name,desc&page=1&size=2
  */
-public interface EmployeeDao extends 
+public interface EmployeeRepository extends 
     PagingAndSortingRepository<Employee, Long>,
                 QuerydslPredicateExecutor<Employee>, 
                 QuerydslBinderCustomizer<QEmployee>{
@@ -30,7 +30,7 @@ public interface EmployeeDao extends
         bindings.bind(String.class).first(
             (SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase); 
 
-        bindings.bind(root.name).all((path, values) -> ExpressionProviderFactory.getPredicate(path, values)); 
+        bindings.bind(root.name).all(ExpressionProviderFactory::getPredicate); 
         
       }
 } 
