@@ -8,7 +8,8 @@ import org.springframework.format.annotation.NumberFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
 @Entity 
@@ -24,7 +25,9 @@ public class Employee{
     private String name;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date birthdate;
+    private LocalDate birthdate;
+
+    private LocalTime entry;
 
     private ZonedDateTime lastLogin; 
     
